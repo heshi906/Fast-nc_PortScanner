@@ -4,21 +4,17 @@ context(arch='amd64', log_level='debug', os='linux')
 
 #多线程里面运行的函数
 def thread_function(portstart, keyword, cishu, timeout,pinglv,name):
-    rec = ''
     for j in range(cishu):
         try:
             p = remote(server, portstart + j * pinglv, timeout=timeout)
             sleep(0.1)
             t = p.recvline(timeout=timeout)
-            rec=t
-        except:
-            continue
-            pass
-        print(rec)
-        if rec != b'' and keyword in rec:
+            if rec != b'' and keyword in rec:
             with open(name, 'a+') as f:
                 f.write("ports:"+str(portstart + j * pinglv)+ str(rec)+'\n')
                 f.close()
+        except:
+            continue
 
 
 pinglv = 5000               # 这里是频率，可以自定义
