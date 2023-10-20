@@ -8,7 +8,7 @@ def thread_function(portstart, keyword, cishu, timeout,pinglv,name):
         try:
             p = remote(server, portstart + j * pinglv, timeout=timeout)
             sleep(0.1)
-            t = p.recvline(timeout=timeout)
+            rec = p.recvline(timeout=timeout)
             if rec != b'' and keyword in rec:
             with open(name, 'a+') as f:
                 f.write("ports:"+str(portstart + j * pinglv)+ str(rec)+'\n')
